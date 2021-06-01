@@ -10,7 +10,9 @@ const idParamsSchema = {
 const postEmployeeBodySchema = {
     body: joi.object().keys({
         name: joi.string().max(128).required(),
-        age: joi.number().max(120).required()
+        age: joi.number().max(120).required(),
+        username: joi.string().trim().required(),
+        password: joi.string().trim().required(),
     }).unknown(false)
 }
 

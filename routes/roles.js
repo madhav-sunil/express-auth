@@ -1,6 +1,8 @@
 const express = require('express');
 const validate = require('express-validation');
 const rolesController = require('../controller/roles');
+const { authorize } = require("../middleware/authentication");
+
 const {
     postRolesBodySchema,
     editRolesBodySchema
@@ -9,18 +11,18 @@ const {
 const router = express.Router();
 
 // GET => /roles
-router.get('/', rolesController.getAllRoles);
+router.get('/', authorize, rolesController.getAllRoles);
 
 // GET => /roles/id
-router.get('/:id', rolesController.getRole);
+router.get('/:id', authorize, rolesController.getRole);
 
 // POST => /roles
-router.post('/', validate(postRolesBodySchema), rolesController.postRole);
+router.post('/', validate(postRolesBodySchema), authorize, rolesController.postRole);
 
 // PUT => /roles/id
-router.put('/:id', validate(editRolesBodySchema), rolesController.editRole);
+router.put('/:id', validate(editRolesBodySchema), authorize, rolesController.editRole);
 
 // DELETE => /roles/id
-router.delete('/:id', rolesController.editRole);
+router.delete('/:id', authorize, rolesController.editRole);
 
 module.exports = router;

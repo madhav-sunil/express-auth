@@ -13,6 +13,7 @@ const EmpRoles = require("./models/employeeRole");
 const empRoutes = require('./routes/employees');
 const depRoutes = require('./routes/departments');
 const rolesRoutes = require('./routes/roles');
+const loginRoute = require('./routes/login');
 
 
 /**
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/employees', empRoutes);
 app.use('/departments', depRoutes);
 app.use('/roles', rolesRoutes);
+app.use('/login', loginRoute);
 
 // Error Middlewares
 app.use(notFound);
