@@ -7,10 +7,12 @@ const { notFound, convertError } = require('./middleware/errorMiddleware')
 
 const Employee = require('./models/employees');
 const Department = require('./models/departments');
+const Roles = require('./models/roles');
 const EmpDept = require('./models/employeeDepartment');
-
+const EmpRoles = require("./models/employeeRole");
 const empRoutes = require('./routes/employees');
 const depRoutes = require('./routes/departments');
+const rolesRoutes = require('./routes/roles');
 
 
 /**
@@ -26,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // API routes
 app.use('/employees', empRoutes);
 app.use('/departments', depRoutes);
+app.use('/roles', rolesRoutes);
 
 // Error Middlewares
 app.use(notFound);
@@ -47,6 +50,21 @@ EmpDept.belongsTo(Department, {
     onDelete: 'CASCADE'
 });
 
+// Employee.hasMany(EmpRole);
+EmpRoles.belongsTo(Employee, {
+    foreignKey: {
+        name: 'empId'
+    },
+    onDelete: 'CASCADE'
+});
+
+// Department.hasMany(EmpRoles);
+EmpRoles.belongsTo(Roles, {
+    foreignKey: {
+        name: 'roleId'
+    },
+    onDelete: 'CASCADE'
+});
 
 sequelize
     .sync()

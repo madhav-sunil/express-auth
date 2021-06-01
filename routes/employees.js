@@ -5,7 +5,9 @@ const {
   idParamsSchema,
   postEmployeeBodySchema,
   editEmployeeBodySchema,
-  postEmployeeDepartmentBodySchema
+  postEmployeeDepartmentBodySchema,
+  postEmployeeRolesBodySchema,
+  postEmployeeAddressBodySchema,
 } = require('../validation/joiRequestValidation');
 
 const router = express.Router();
@@ -30,5 +32,17 @@ router.get('/:id/departments', empController.getEmployeeDepartments);
 
 // POST => /employees/id/departments
 router.post('/:id/departments', validate(postEmployeeDepartmentBodySchema), empController.postEmployeeDepartment);
+
+// GET => /employees/id/roles
+router.get('/:id/roles', empController.getEmployeeRoles);
+
+// POST => /employees/id/roles
+router.post('/:id/roles', validate(postEmployeeRolesBodySchema), empController.postEmployeeRoles);
+
+// GET  => /employees/id/address
+router.get('/:id/address', empController.getEmployeeAddress);
+
+// POST => /employees/id/address
+router.post('/:id/address', validate(postEmployeeAddressBodySchema), empController.postEmployeeAddress);
 
 module.exports = router;
