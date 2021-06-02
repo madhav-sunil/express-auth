@@ -69,7 +69,7 @@ EmpRoles.belongsTo(Roles, {
     onDelete: 'CASCADE'
 });
 
-EmpAddress.belongsTo(Employee, {
+EmpAddress.hasOne(Employee, {
     foreignKey: {
         name: "empId"
     },
