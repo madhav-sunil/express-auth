@@ -14,6 +14,7 @@ const empRoutes = require('./routes/employees');
 const depRoutes = require('./routes/departments');
 const rolesRoutes = require('./routes/roles');
 const loginRoute = require('./routes/login');
+const EmpAddress = require('./models/employeeAddress');
 
 
 /**
@@ -64,6 +65,13 @@ EmpRoles.belongsTo(Employee, {
 EmpRoles.belongsTo(Roles, {
     foreignKey: {
         name: 'roleId'
+    },
+    onDelete: 'CASCADE'
+});
+
+EmpAddress.belongsTo(Employee, {
+    foreignKey: {
+        name: "empId"
     },
     onDelete: 'CASCADE'
 });
