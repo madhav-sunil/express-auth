@@ -38,12 +38,12 @@ router.post('/:id/departments', validate(postEmployeeDepartmentBodySchema), auth
 router.get('/:id/roles', authorize, empController.getEmployeeRoles);
 
 // POST => /employees/id/roles
-router.post('/:id/roles', validate(postEmployeeRolesBodySchema), empController.postEmployeeRoles);
+router.post('/:id/roles', validate(postEmployeeRolesBodySchema), authorize, empController.postEmployeeRoles);
 
 // GET  => /employees/id/address
-router.get('/:id/address', empController.getEmployeeAddress);
+router.get('/:id/address', authorize, empController.getEmployeeAddress);
 
 // POST => /employees/id/address
-router.post('/:id/address', validate(postEmployeeAddressBodySchema), empController.postEmployeeAddress);
+router.post('/:id/address', validate(postEmployeeAddressBodySchema), authorize, empController.postEmployeeAddress);
 
 module.exports = router;
